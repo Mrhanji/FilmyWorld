@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding:
                           const EdgeInsets.only(top: 12.0, left: 8, bottom: 1),
                       child: Text(
-                        'Trending Tv Shows',
+                        'Trending Tv Show',
                         style:
                             GoogleFonts.ubuntu(fontSize: size.height * 0.023),
                       ),
