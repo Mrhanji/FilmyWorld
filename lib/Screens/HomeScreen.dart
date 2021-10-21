@@ -1,4 +1,5 @@
 import 'package:flimyworld/Screens/Allshows.dart';
+import 'package:flimyworld/Screens/PersonView.dart';
 import 'package:flimyworld/api/api_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       theme: ThemeData(
           brightness: Brightness.dark, accentColor: Colors.transparent),
       home: Scaffold(
-         key: _scaffoldkey,
+        key: _scaffoldkey,
         appBar: AppBar(
           leading: InkWell(
             child: Image.asset('assets/images/fwlogo-trans.png'),
@@ -237,16 +238,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        CircleAvatar(
-                                          radius: 30.0,
-                                          backgroundImage: NetworkImage(personlist[
-                                                      index]['profile_path'] !=
-                                                  null
-                                              ? urls +
-                                                  personlist[index]
-                                                          ['profile_path']
-                                                      .toString()
-                                              : 'https://via.placeholder.com/150'),
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                         PersonView(id:personlist[index]['id'])));
+                                          },
+                                          child: CircleAvatar(
+                                            radius: 30.0,
+                                            backgroundImage: NetworkImage(
+                                                personlist[index]
+                                                            ['profile_path'] !=
+                                                        null
+                                                    ? urls +
+                                                        personlist[index]
+                                                                ['profile_path']
+                                                            .toString()
+                                                    : 'https://via.placeholder.com/150'),
+                                          ),
                                         ),
                                         Text(
                                           personlist[index]['name'].toString(),
