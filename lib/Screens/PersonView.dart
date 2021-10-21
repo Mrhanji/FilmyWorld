@@ -4,7 +4,8 @@ import 'package:flimyworld/Screens/HomeScreen.dart';
 import 'package:flimyworld/api/api_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:glass_container/glass_container.dart';
+
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
@@ -119,6 +120,11 @@ class _PersonViewState extends State<PersonView> {
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: size.height * 0.02),
+                                ),
+                                 Text( place.toString(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: size.height * 0.015),overflow: TextOverflow.ellipsis,maxLines: 1,
                                 ),
                                 Text(
                                   deathday == false
