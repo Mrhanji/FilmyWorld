@@ -3,8 +3,10 @@ import 'package:flimyworld/api/api_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_glow/flutter_glow.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -66,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.black,
         body: Container(
           child: SingleChildScrollView(
-            child: Column(
+            child: Column(  mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   children: [
@@ -82,7 +84,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 Container(
-                    height: size.height * 0.45,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFF000000).withAlpha(60),
+                            blurRadius: 6.0,
+                            spreadRadius: 0.0,
+                            offset: Offset(
+                              0.0,
+                              3.0,
+                            ),
+                          ),
+                        ]),
+                    height: size.height * 0.38,
                     width: size.width,
                     child: TrendingMovielist != null
                         ? ListView.builder(
@@ -90,61 +105,60 @@ class _HomeScreenState extends State<HomeScreen> {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0, right: 5.0),
-                                child: Container(
-                                    height: size.height * 0.4,
-                                    width: size.width * 0.5,
-                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                                    child: Stack(
-                                      children: [
-                                        Positioned(
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: NetworkImage(urls +
-                                                  TrendingMovielist[index]
-                                                          ['poster_path']
-                                                      .toString()),
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(25)),
-                                          )),
+                                padding: const EdgeInsets.only(top:8.0,left:10,right:10),
+                                child: Stack(
+                                  children: [
+                                  Positioned(
+                                   
+                                    child: Container( 
+                                      height: size.height*0.35,
+                                      width: size.width*0.45,
+                                    
+                                                                      
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(image: NetworkImage(urls+TrendingMovielist[index]['poster_path']),fit: BoxFit.fill),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(18.0),
+                                      ),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.white12,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
                                         ),
-                                        Positioned(
-                                            bottom: 0,
-                                            left: 0,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Text(
-                                                  TrendingMovielist[index]
-                                                          ['original_title']
-                                                      .toString(),
-                                                  style: GoogleFonts.ubuntu(
-                                                      fontSize:
-                                                          size.height * 0.023),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                                Text(
-                                                  '⭐ ' +
-                                                      TrendingMovielist[index]
-                                                              ['vote_average']
-                                                          .toString(),
-                                                  style: GoogleFonts.ubuntu(
-                                                      fontSize:
-                                                          size.height * 0.023),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              ],
-                                            ))
-                                      ],
-                                    )),
+                                       
+                                      ]),
+                                    ),
+                                  ),
+
+Positioned(bottom: 35,right: 0,
+  child: Row(children: [Icon(Icons.star_rounded,color: Colors.amber.shade600,),
+  Text(TrendingMovielist[index]['vote_average'].toString()+'  ',style: TextStyle(fontSize: size.height*0.023)
+  )],)),
+Positioned(bottom: size.height*0.013,
+  child: Container( width: size.width*0.45,
+  height: size.height*0.082,
+    decoration: BoxDecoration(backgroundBlendMode: BlendMode.darken,
+     gradient: LinearGradient(
+                colors: [
+                  Colors.black12,
+                  Colors.black
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.0, 1.1],
+                tileMode: TileMode.clamp),
+          
+  ),
+    child: 
+  Text(' '+TrendingMovielist[index]['title'],style: TextStyle(fontSize: size.height*0.028),maxLines: 1,overflow: TextOverflow.ellipsis,)
+  
+  ))
+
+                                  ],
+
+                                ),
                               );
                             },
                           )
@@ -156,155 +170,155 @@ class _HomeScreenState extends State<HomeScreen> {
                           )),
 
                 // Persons
-                Row(
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 12.0, left: 8, bottom: 5),
-                      child: Text(
-                        'Popular Persons',
-                        style:
-                            GoogleFonts.ubuntu(fontSize: size.height * 0.023),
+                  Row(
+                    children: [
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 12.0, left: 8, bottom: 0),
+                        child: Text(
+                          'Popular People',
+                          style:
+                              GoogleFonts.ubuntu(fontSize: size.height * 0.023),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
 
-                Container(
-                    height: size.height * 0.1,
-                    width: size.width,
-                    child: personlist != null
-                        ? ListView.builder(
-                            itemCount: personlist.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                  padding: const EdgeInsets.only(top: 2),
-                                  child: Container(
-                                    height: size.height * 0.1,
-                                    //  color: Colors.amber,
-                                    width: size.width * 0.25,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 30.0,
-                                          backgroundImage: NetworkImage(personlist[
-                                                      index]['profile_path'] !=
-                                                  null
-                                              ? urls +
-                                                  personlist[index]
-                                                          ['profile_path']
-                                                      .toString()
-                                              : 'https://via.placeholder.com/150'),
+                  Container(
+                      height: size.height * 0.1,
+                      width: size.width,
+                      child: personlist != null
+                          ? ListView.builder(
+                              itemCount: personlist.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                    padding: const EdgeInsets.only(top: 2),
+                                    child: Container(
+                                      height: size.height * 0.1,
+                                      //  color: Colors.amber,
+                                      width: size.width * 0.25,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 30.0,
+                                            backgroundImage: NetworkImage(personlist[
+                                                        index]['profile_path'] !=
+                                                    null
+                                                ? urls +
+                                                    personlist[index]
+                                                            ['profile_path']
+                                                        .toString()
+                                                : 'https://via.placeholder.com/150'),
+                                          ),
+                                          Text(
+                                            personlist[index]['name'].toString(),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          )
+                                        ],
+                                      ),
+                                    ));
+                              },
+                            )
+                          : Container(
+                              child: Center(
+                                child: Lottie.asset(
+                                    'assets/animations/loading.json'),
+                              ),
+                            )),
+
+                   //Trending Tv Shows Area
+
+                  Row(
+                    children: [
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 12.0, left: 8, bottom: 0),
+                        child: Text(
+                          'Trending Tv Shows',
+                          style:
+                              GoogleFonts.ubuntu(fontSize: size.height * 0.023),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                      height: size.height * 0.45,
+                      width: size.width,
+                      child: TrendingTvshowslist != null
+                          ? ListView.builder(
+                              itemCount: TrendingTvshowslist.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return  Padding(
+                                padding: const EdgeInsets.only(top:8.0,left:10,right:10),
+                                child: Stack(
+                                  children: [
+                                  Positioned(
+                                   
+                                    child: Container( 
+                                      height: size.height*0.35,
+                                      width: size.width*0.45,
+                                    
+                                                                      
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(image: NetworkImage(urls+TrendingTvshowslist[index]['poster_path']),fit: BoxFit.fill),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(18.0),
+                                      ),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.white12,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
                                         ),
-                                        Text(
-                                          personlist[index]['name'].toString(),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        )
-                                      ],
+                                       
+                                      ]),
                                     ),
-                                  ));
-                            },
-                          )
-                        : Container(
-                            child: Center(
-                              child: Lottie.asset(
-                                  'assets/animations/loading.json'),
-                            ),
-                          )),
+                                  ),
 
-                //Trending Tv Shows Area
 
-                Row(
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 12.0, left: 8, bottom: 1),
-                      child: Text(
-                        'Trending Tv Shows',
-                        style:
-                            GoogleFonts.ubuntu(fontSize: size.height * 0.023),
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                    height: size.height * 0.45,
-                    width: size.width,
-                    child: TrendingTvshowslist != null
-                        ? ListView.builder(
-                            itemCount: TrendingTvshowslist.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0, right: 5.0),
-                                child: Container(
-                                    height: size.height * 0.4,
-                                    width: size.width * 0.5,
-                                    child: Stack(
-                                      children: [
-                                        Positioned(
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: NetworkImage(urls +
-                                                  TrendingTvshowslist[index]
-                                                          ['poster_path']
-                                                      .toString()),
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(25)),
-                                          )),
-                                        ),
-                                        Positioned(
-                                            bottom: 0,
-                                            left: 0,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Text(
-                                                  TrendingTvshowslist[index]
-                                                          ['original_name']
-                                                      .toString(),
-                                                  style: GoogleFonts.ubuntu(
-                                                      fontSize:
-                                                          size.height * 0.023),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                                Text(
-                                                  '⭐ ' +
-                                                      TrendingTvshowslist[index]
-                                                              ['vote_average']
-                                                          .toString(),
-                                                  style: GoogleFonts.ubuntu(
-                                                      fontSize:
-                                                          size.height * 0.023),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              ],
-                                            ))
-                                      ],
-                                    )),
+Positioned(bottom: size.height*0.08,
+  child: Container( width: size.width*0.45,
+  height: size.height*0.082,
+    decoration: BoxDecoration(backgroundBlendMode: BlendMode.darken,
+     gradient: LinearGradient(
+                colors: [
+                  Colors.black12,
+                  Colors.black
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.0, 1.1],
+                tileMode: TileMode.clamp),
+          
+  ),
+    child: 
+  Text(' '+TrendingTvshowslist[index]['original_name'],style: TextStyle(fontSize: size.height*0.025),maxLines: 1,overflow: TextOverflow.ellipsis,)
+  
+  )),
+Positioned(bottom: size.height*0.12,right: 0,
+  child: Row(children: [Icon(Icons.star_rounded,color: Colors.amber.shade600,),
+  Text(TrendingTvshowslist[index]['vote_average'].toString()+'  ',style: TextStyle(fontSize: size.height*0.023)
+  )],)),
+                                  ],
+
+                                ),
                               );
-                            },
-                          )
-                        : Container(
-                            child: Center(
-                              child: Lottie.asset(
-                                  'assets/animations/loading.json'),
-                            ),
-                          )),
+                              },
+                            )
+                          : Container(
+                              child: Center(
+                                child: Lottie.asset(
+                                    'assets/animations/loading.json'),
+                              ),
+                            )),
               ],
             ),
           ),
