@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 12.0, left: 8, bottom: 1),
+                          const EdgeInsets.only(top: 12.0, left: 5, bottom: 1),
                       child: Text(
                         'Trending Movies',
                         style:
@@ -174,7 +174,7 @@ Positioned(bottom: size.height*0.013,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsets.only(top: 12.0, left: 8, bottom: 0),
+                            const EdgeInsets.only(top: 12.0, left: 5, bottom: 0),
                         child: Text(
                           'Popular People',
                           style:
@@ -183,7 +183,7 @@ Positioned(bottom: size.height*0.013,
                       ),
                     ],
                   ),
-
+SizedBox(height: size.height*0.02,),
                   Container(
                       height: size.height * 0.1,
                       width: size.width,
@@ -233,12 +233,12 @@ Positioned(bottom: size.height*0.013,
                             )),
 
                    //Trending Tv Shows Area
-
+SizedBox(height: size.height*0.02,),
                   Row(
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsets.only(top: 12.0, left: 8, bottom: 0),
+                            const EdgeInsets.only(top: 12.0, left: 5, bottom: 0),
                         child: Text(
                           'Trending Tv Shows',
                           style:
@@ -247,8 +247,9 @@ Positioned(bottom: size.height*0.013,
                       ),
                     ],
                   ),
+                  SizedBox(height: size.height*0.02,),
                   Container(
-                      height: size.height * 0.45,
+                      height: size.height * 0.38,
                       width: size.width,
                       child: TrendingTvshowslist != null
                           ? ListView.builder(
@@ -284,7 +285,7 @@ Positioned(bottom: size.height*0.013,
                                   ),
 
 
-Positioned(bottom: size.height*0.08,
+Positioned(bottom: size.height*0.01,
   child: Container( width: size.width*0.45,
   height: size.height*0.082,
     decoration: BoxDecoration(backgroundBlendMode: BlendMode.darken,
@@ -303,7 +304,7 @@ Positioned(bottom: size.height*0.08,
   Text(' '+TrendingTvshowslist[index]['original_name'],style: TextStyle(fontSize: size.height*0.025),maxLines: 1,overflow: TextOverflow.ellipsis,)
   
   )),
-Positioned(bottom: size.height*0.12,right: 0,
+Positioned(bottom: size.height*0.06,right: 0,
   child: Row(children: [Icon(Icons.star_rounded,color: Colors.amber.shade600,),
   Text(TrendingTvshowslist[index]['vote_average'].toString()+'  ',style: TextStyle(fontSize: size.height*0.023)
   )],)),
