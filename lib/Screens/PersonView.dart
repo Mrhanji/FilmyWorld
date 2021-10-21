@@ -50,6 +50,7 @@ class _PersonViewState extends State<PersonView> {
           name = data['name'];
           place = data['place_of_birth'];
           popularity = data['popularity'];
+          bio = data['biography'];
 
           if (deathday == null) {
             deathday = false;
@@ -81,20 +82,21 @@ class _PersonViewState extends State<PersonView> {
             )),
         body: img != null
             ? Container(
-                 height: size.height ,
-                    width: size.width,
-              child: Stack(
-                children: [
-                  Positioned(bottom:0,left:-120,child: Image.asset('assets/images/camera.png')),
-                  Positioned(
-                   top: 0,left: 0,right: 0,
-                    child: Container( width: size.width,
-                
-                height: size.height * 0.37,
-                      child: GlassContainer(
-                       shadowBlurRadius: 1,
-                       shadowSpreadRadius: 1,
-                       contColor: Colors.white10,
+                height: size.height,
+                width: size.width,
+                child: Stack(
+                  children: [
+                    // Positioned(
+                    //     bottom: 0,
+                    //     left: -120,
+                    //     child: Image.asset('assets/images/camera.png')),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        width: size.width,
+                        height: size.height * 0.37,
                         child: Row(
                           children: [
                             Container(
@@ -105,22 +107,27 @@ class _PersonViewState extends State<PersonView> {
                                   image: DecorationImage(
                                       image: NetworkImage(urls + img))),
                             ),
-                            Column(
+                            Column(mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   name.toString(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: size.height * 0.025),
+                                ),
+                                Text( birthday.toString(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: size.height * 0.02),
+                                ),
+                                Text(
+                                  deathday == false
+                                      ? ''
+                                      : '🪦' + deathday.toString(),
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Text(
-                                  birthday.toString(),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(deathday==false?'':deathday.toString(),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-
-                                Text(
-                                 known.toString(),
+                                  known.toString(),
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ],
@@ -129,25 +136,32 @@ class _PersonViewState extends State<PersonView> {
                         ),
                       ),
                     ),
-                  ),
-              
-               Row(
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 12.0, left: 5, bottom: 0),
-                      child: Text(
-                        'Biography',
-                        style:
-                            GoogleFonts.ubuntu(fontSize: size.height * 0.023),
+                    Positioned(
+                      top: size.height * 0.35,
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 12.0, left: 5, bottom: 0),
+                            child: Text(
+                              'Biography',
+                              style: GoogleFonts.ubuntu(
+                                  fontSize: size.height * 0.023,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    Positioned(  top: size.height * 0.40,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left:7.0,right: 8),
+                        child: Container(width: size.width,
+                          child: Text(bio.toString(), style: TextStyle(color: Colors.grey.shade500,),softWrap: true,)),
+                      ))
                   ],
                 ),
-              
-                ],
-              ),
-            )
+              )
             : Center(child: Lottie.asset('assets/animations/loading.json')),
       ),
     );
