@@ -43,7 +43,10 @@ class _PersonViewState extends State<PersonView> {
           deathday = data['deathday'];
           gender = data['gender'];
           homepage = data['homepage'];
-          
+          known = data['known_for_department'];
+          name = data['name'];
+          place = data['place_of_birth'];
+          popularity = data['popularity'];
         });
         print(img);
       }
@@ -58,7 +61,7 @@ class _PersonViewState extends State<PersonView> {
         backgroundColor: Colors.black,
         appBar: AppBar(
             backgroundColor: Colors.black,
-            title: Text('tile'),
+            title: Text(name.toString()),
             centerTitle: true,
             leading: IconButton(
               onPressed: () {
@@ -67,7 +70,7 @@ class _PersonViewState extends State<PersonView> {
               },
               icon: Icon(CupertinoIcons.left_chevron),
             )),
-        body: Image.network(urls + img.toString()),
+        //   body: Image.network(urls + img.toString()),
       ),
     );
   }
