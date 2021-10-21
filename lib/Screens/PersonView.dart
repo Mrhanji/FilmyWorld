@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flimyworld/Screens/HomeScreen.dart';
 import 'package:flimyworld/api/api_info.dart';
+import 'package:flimyworld/widgets/Combined_credit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -82,92 +83,104 @@ class _PersonViewState extends State<PersonView> {
               icon: Icon(CupertinoIcons.left_chevron),
             )),
         body: img != null
-            ? Container(
-                height: size.height,
-                width: size.width,
-                child: Stack(
-                  children: [
-                    // Positioned(
-                    //     bottom: 0,
-                    //     left: -120,
-                    //     child: Image.asset('assets/images/camera.png')),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        width: size.width,
-                        height: size.height * 0.37,
+            ? SingleChildScrollView(
+              child: Container(
+                  height: size.height,
+                  width: size.width,
+                  child: Stack(
+                    children: [
+                      // Positioned(
+                      //     bottom: 0,
+                      //     left: -120,
+                      //     child: Image.asset('assets/images/camera.png')),
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          width: size.width,
+                          height: size.height * 0.37,
+                          child: Row(
+                            children: [
+                              Container(
+                                height: size.height * 0.3,
+                                width: size.width * 0.5,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(40),
+                                    image: DecorationImage(
+                                        image: NetworkImage(urls + img))),
+                              ),
+                              Column(mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    name.toString(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: size.height * 0.025),
+                                  ),
+                                  Text( birthday.toString(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: size.height * 0.02),
+                                  ),
+                                   Text( place.toString(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: size.height * 0.015),overflow: TextOverflow.ellipsis,maxLines: 1,
+                                  ),
+                                  Text(
+                                    deathday == false
+                                        ? ''
+                                        : '🪦' + deathday.toString(),
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  Text(
+                                    known.toString(),
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: size.height * 0.35,
                         child: Row(
                           children: [
-                            Container(
-                              height: size.height * 0.3,
-                              width: size.width * 0.5,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40),
-                                  image: DecorationImage(
-                                      image: NetworkImage(urls + img))),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 12.0, left: 5, bottom: 0),
+                              child: Text(
+                                'Biography',
+                                style: GoogleFonts.ubuntu(
+                                    fontSize: size.height * 0.023,
+                                    color: Colors.white),
+                              ),
                             ),
-                            Column(mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  name.toString(),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: size.height * 0.025),
-                                ),
-                                Text( birthday.toString(),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: size.height * 0.02),
-                                ),
-                                 Text( place.toString(),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: size.height * 0.015),overflow: TextOverflow.ellipsis,maxLines: 1,
-                                ),
-                                Text(
-                                  deathday == false
-                                      ? ''
-                                      : '🪦' + deathday.toString(),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  known.toString(),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            )
                           ],
                         ),
                       ),
-                    ),
-                    Positioned(
-                      top: size.height * 0.35,
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 12.0, left: 5, bottom: 0),
-                            child: Text(
-                              'Biography',
-                              style: GoogleFonts.ubuntu(
-                                  fontSize: size.height * 0.023,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(  top: size.height * 0.40,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left:7.0,right: 8),
-                        child: Container(width: size.width,
-                          child: Text(bio.toString(), style: TextStyle(color: Colors.grey.shade500,),softWrap: true,)),
-                      ))
-                  ],
+                      Positioned(  top: size.height * 0.40,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left:7.0,right: 8),
+                          child: Container(width: size.width,
+                            child: Text(bio.toString(), style: TextStyle(color: Colors.grey.shade500,),softWrap: true,)),
+                        )),
+            
+            
+            
+            Positioned(bottom: 0,
+              child: Container(height: size.height*0.3,color: Colors.red,width: size.width,
+                child: Combined_credit(id: widget.id.toString(),),
+                ))
+            
+            
+            
+                    ],
+                  ),
                 ),
-              )
+            )
             : Center(child: Lottie.asset('assets/animations/loading.json')),
       ),
     );
