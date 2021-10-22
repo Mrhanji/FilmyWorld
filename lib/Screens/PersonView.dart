@@ -67,7 +67,7 @@ class _PersonViewState extends State<PersonView> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return MaterialApp(
+    return MaterialApp( theme: ThemeData(brightness: Brightness.dark,accentColor: Colors.black,primaryColor: Colors.black),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.black,
@@ -97,6 +97,7 @@ class _PersonViewState extends State<PersonView> {
                               width: size.width,
                               height: size.height * 0.37,
                               child: Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     height: size.height * 0.3,
