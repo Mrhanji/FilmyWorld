@@ -85,98 +85,105 @@ class _PersonViewState extends State<PersonView> {
         body: img != null
             ? SingleChildScrollView(
               child: Container(
-                  height: size.height,
-                  width: size.width,
-                  child: Stack(
+                
+                  child: Column(
                     children: [
-                      // Positioned(
-                      //     bottom: 0,
-                      //     left: -120,
-                      //     child: Image.asset('assets/images/camera.png')),
-                      Positioned(
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        child: Container(
-                          width: size.width,
-                          height: size.height * 0.37,
-                          child: Row(
-                            children: [
-                              Container(
-                                height: size.height * 0.3,
-                                width: size.width * 0.5,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(40),
-                                    image: DecorationImage(
-                                        image: NetworkImage(urls + img))),
-                              ),
-                              Column(mainAxisAlignment: MainAxisAlignment.center,
+                    
+                            // Positioned(
+                            //     bottom: 0,
+                            //     left: -120,
+                            //     child: Image.asset('assets/images/camera.png')),
+                            Container(
+                              width: size.width,
+                              height: size.height * 0.37,
+                              child: Row(
                                 children: [
-                                  Text(
-                                    name.toString(),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: size.height * 0.025),
+                                  Container(
+                                    height: size.height * 0.3,
+                                    width: size.width * 0.5,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(40),
+                                        image: DecorationImage(
+                                            image: NetworkImage(urls + img))),
                                   ),
-                                  Text( birthday.toString(),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: size.height * 0.02),
-                                  ),
-                                   Text( place.toString(),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: size.height * 0.015),overflow: TextOverflow.ellipsis,maxLines: 1,
-                                  ),
-                                  Text(
-                                    deathday == false
-                                        ? ''
-                                        : '🪦' + deathday.toString(),
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  Text(
-                                    known.toString(),
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                                  Column(mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        name.toString(),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: size.height * 0.025),
+                                      ),
+                                      Text( birthday.toString(),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: size.height * 0.02),
+                                      ),
+                                       Text( place.toString(),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: size.height * 0.015),overflow: TextOverflow.ellipsis,maxLines: 1,
+                                      ),
+                                      Text(
+                                        deathday == false
+                                            ? ''
+                                            : '🪦' + deathday.toString(),
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        known.toString(),
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  )
                                 ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: size.height * 0.35,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 12.0, left: 5, bottom: 0),
-                              child: Text(
-                                'Biography',
-                                style: GoogleFonts.ubuntu(
-                                    fontSize: size.height * 0.023,
-                                    color: Colors.white),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      Positioned(  top: size.height * 0.40,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left:7.0,right: 8),
-                          child: Container(width: size.width,
-                            child: Text(bio.toString(), style: TextStyle(color: Colors.grey.shade500,),softWrap: true,)),
-                        )),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 12.0, left: 5, bottom: 0),
+                                  child: Text(
+                                    'Biography',
+                                    style: GoogleFonts.ubuntu(
+                                        fontSize: size.height * 0.023,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
+                           
+            
+            
+         
             
             
             
-            Positioned(bottom: 0,
-              child: Container(height: size.height*0.3,color: Colors.red,width: size.width,
+                         
+                     
+                      Padding(
+                                padding: const EdgeInsets.only(left:7.0,right: 8),
+                                child: Container(width: size.width,
+                                  child: Text(bio.toString(), style: TextStyle(color: Colors.grey.shade500,),softWrap: true,)),
+                              ),
+Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 12.0, left: 5, bottom: 0),
+                                    child: Text(
+                                      'Movie & Tv',
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: size.height * 0.023,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                      Container(height: size.height*0.45,width: size.width,
                 child: Combined_credit(id: widget.id.toString(),),
-                ))
-            
-            
-            
+                )
                     ],
                   ),
                 ),

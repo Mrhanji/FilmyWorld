@@ -1,4 +1,5 @@
 import 'package:flimyworld/Screens/HomeScreen.dart';
+import 'package:flimyworld/widgets/Combined_credit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,10 @@ class _AllshowsState extends State<Allshows> {
                         MaterialPageRoute(builder: (context) => HomeScreen()))
               ),
         ),
+
+
+body: Combined_credit(id: 55,),
+
         bottomNavigationBar: Container(
           color: Colors.black87,
           width: size.width,
