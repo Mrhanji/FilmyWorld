@@ -1,6 +1,6 @@
 # flimyworld
 
-A new Flutter project.
+A Movie app
 
 ## Getting Started
 

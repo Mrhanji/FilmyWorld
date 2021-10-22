@@ -4,7 +4,7 @@ import 'package:flimyworld/Screens/HomeScreen.dart';
 import 'package:flimyworld/api/api_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:glass_container/glass_container.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
@@ -54,14 +54,7 @@ class _MoviesViewState extends State<MoviesView> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           backgroundColor: Colors.black,
-          // appBar: AppBar(
-          //   backgroundColor: Colors.black,
-          //   title: Text(name.toString()),
-          //   leading: IconButton(
-          //       icon: Icon(CupertinoIcons.left_chevron),
-          //       onPressed: () => Navigator.pop(context,
-          //           MaterialPageRoute(builder: (context) => HomeScreen()))),
-          // ),
+         
           body: img != null
               ? Stack(
                   children: [
