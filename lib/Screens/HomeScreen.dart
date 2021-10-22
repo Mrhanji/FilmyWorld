@@ -1,4 +1,5 @@
 import 'package:flimyworld/Screens/Allshows.dart';
+import 'package:flimyworld/Screens/MoviesView.dart';
 import 'package:flimyworld/Screens/PersonView.dart';
 import 'package:flimyworld/api/api_info.dart';
 import 'package:flutter/cupertino.dart';
@@ -114,82 +115,92 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: TrendingMovielist.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 8.0, left: 10, right: 10),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      child: Container(
-                                        height: size.height * 0.35,
-                                        width: size.width * 0.45,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(urls +
-                                                    TrendingMovielist[index]
-                                                        ['poster_path']),
-                                                fit: BoxFit.fill),
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(18.0),
-                                            ),
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.white12,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MoviesView(
+                                              mid: TrendingMovielist[index]
+                                                  ['id'])));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, left: 10, right: 10),
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        child: Container(
+                                          height: size.height * 0.35,
+                                          width: size.width * 0.45,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage(urls +
+                                                      TrendingMovielist[index]
+                                                          ['poster_path']),
+                                                  fit: BoxFit.fill),
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(18.0),
                                               ),
-                                            ]),
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.white12,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                ),
+                                              ]),
+                                        ),
                                       ),
-                                    ),
-                                    Positioned(
-                                        bottom: 35,
-                                        right: 0,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.star_rounded,
-                                              color: Colors.amber.shade600,
-                                            ),
-                                            Text(
-                                                TrendingMovielist[index]
-                                                            ['vote_average']
-                                                        .toString() +
-                                                    '  ',
+                                      Positioned(
+                                          bottom: 35,
+                                          right: 0,
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.star_rounded,
+                                                color: Colors.amber.shade600,
+                                              ),
+                                              Text(
+                                                  TrendingMovielist[index]
+                                                              ['vote_average']
+                                                          .toString() +
+                                                      '  ',
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          size.height * 0.023))
+                                            ],
+                                          )),
+                                      Positioned(
+                                          bottom: size.height * 0.013,
+                                          child: Container(
+                                              width: size.width * 0.45,
+                                              height: size.height * 0.082,
+                                              decoration: BoxDecoration(
+                                                backgroundBlendMode:
+                                                    BlendMode.darken,
+                                                gradient: LinearGradient(
+                                                    colors: [
+                                                      Colors.black12,
+                                                      Colors.black
+                                                    ],
+                                                    begin: Alignment.topCenter,
+                                                    end: Alignment.bottomCenter,
+                                                    stops: [0.0, 1.1],
+                                                    tileMode: TileMode.clamp),
+                                              ),
+                                              child: Text(
+                                                ' ' +
+                                                    TrendingMovielist[index]
+                                                        ['title'],
                                                 style: TextStyle(
                                                     fontSize:
-                                                        size.height * 0.023))
-                                          ],
-                                        )),
-                                    Positioned(
-                                        bottom: size.height * 0.013,
-                                        child: Container(
-                                            width: size.width * 0.45,
-                                            height: size.height * 0.082,
-                                            decoration: BoxDecoration(
-                                              backgroundBlendMode:
-                                                  BlendMode.darken,
-                                              gradient: LinearGradient(
-                                                  colors: [
-                                                    Colors.black12,
-                                                    Colors.black
-                                                  ],
-                                                  begin: Alignment.topCenter,
-                                                  end: Alignment.bottomCenter,
-                                                  stops: [0.0, 1.1],
-                                                  tileMode: TileMode.clamp),
-                                            ),
-                                            child: Text(
-                                              ' ' +
-                                                  TrendingMovielist[index]
-                                                      ['title'],
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      size.height * 0.028),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            )))
-                                  ],
+                                                        size.height * 0.028),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              )))
+                                    ],
+                                  ),
                                 ),
                               );
                             },
@@ -244,7 +255,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                         PersonView(id:personlist[index]['id'])));
+                                                        PersonView(
+                                                            id: personlist[
+                                                                index]['id'])));
                                           },
                                           child: CircleAvatar(
                                             radius: 30.0,
