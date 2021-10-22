@@ -5,10 +5,9 @@ import 'package:flimyworld/api/api_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_glow/flutter_glow.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -42,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
       TrendingMovielist = TrendingTemp['results'];
       personlist = Persons['results'];
       TrendingTvshowslist = Trendingtv['results'];
-      print(TrendingTvshowslist);
+      
     });
   }
 
