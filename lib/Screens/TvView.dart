@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flimyworld/Screens/HomeScreen.dart';
 import 'package:flimyworld/api/api_info.dart';
-import 'package:flimyworld/widgets/SimilarMovieView.dart';
+
+import 'package:flimyworld/widgets/SimilarTvView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,21 +12,21 @@ import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class MoviesView extends StatefulWidget {
-  var mid;
-  MoviesView({Key key, @required this.mid}) : super(key: key);
+class TvView extends StatefulWidget {
+  var tid;
+  TvView({Key key, @required this.tid}) : super(key: key);
 
   @override
-  _MoviesViewState createState() => _MoviesViewState();
+  _TvViewState createState() => _TvViewState();
 }
 
-class _MoviesViewState extends State<MoviesView> {
+class _TvViewState extends State<TvView> {
   List info;
   var img, name, poster, ratting, overview, tagline, rat;
   @override
   void initState() {
-    var url = Uri.parse("https://api.themoviedb.org/3/movie/" +
-        widget.mid.toString() +
+    var url = Uri.parse("https://api.themoviedb.org/3/tv/" +
+        widget.tid.toString() +
         "?api_key=" +
         api +
         "&language=en-US");
@@ -40,7 +41,9 @@ class _MoviesViewState extends State<MoviesView> {
         tagline = tempdata['tagline'];
         ratting = tempdata['vote_average'];
         overview = tempdata['overview'];
-       
+        name = tempdata['name'];
+        info = tempdata['seasons'];
+
         var s = ratting.toInt();
         // rat = s.toDouble();
         rat = double.tryParse('0.' + s.toString());
@@ -51,22 +54,26 @@ class _MoviesViewState extends State<MoviesView> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return MaterialApp( theme: ThemeData(
-          brightness: Brightness.dark, accentColor: Colors.transparent),
+    return MaterialApp(
+        theme: ThemeData(
+            brightness: Brightness.dark, accentColor: Colors.transparent),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           backgroundColor: Colors.black,
           body: img != null
               ? SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(width: size.width,height: size.height*0.5,
-                      child: Stack(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: size.width,
+                        height: size.height * 0.5,
+                        child: Stack(
                           children: [
                             Positioned(
                                 top: 1,
                                 child: Container(
-                                    child: Image.network(urls + img.toString()))),
+                                    child:
+                                        Image.network(urls + img.toString()))),
                             Positioned(
                                 top: 1,
                                 child: Container(
@@ -80,7 +87,8 @@ class _MoviesViewState extends State<MoviesView> {
                                 child: Container(
                                   width: size.width,
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       IconButton(
                                           icon: Icon(
@@ -90,7 +98,8 @@ class _MoviesViewState extends State<MoviesView> {
                                           onPressed: () => Navigator.pop(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) => HomeScreen()))),
+                                                  builder: (context) =>
+                                                      HomeScreen()))),
                                       IconButton(
                                           icon: Icon(
                                             CupertinoIcons.heart,
@@ -99,7 +108,8 @@ class _MoviesViewState extends State<MoviesView> {
                                           onPressed: () => Navigator.pop(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) => HomeScreen()))),
+                                                  builder: (context) =>
+                                                      HomeScreen()))),
                                     ],
                                   ),
                                 )),
@@ -110,12 +120,13 @@ class _MoviesViewState extends State<MoviesView> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Hero(
-                                      tag: widget.mid,
+                                      tag: widget.tid,
                                       child: Container(
                                         height: size.height * 0.3,
                                         width: size.width * 0.4,
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(20),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
                                             image: DecorationImage(
                                                 image: NetworkImage(
                                                     urls + poster.toString()))),
@@ -126,7 +137,8 @@ class _MoviesViewState extends State<MoviesView> {
                                       padding: EdgeInsets.only(
                                           top: size.height * 0.085, left: 20),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Container(
                                             width: size.width * 0.5,
@@ -144,9 +156,11 @@ class _MoviesViewState extends State<MoviesView> {
                                             child: Text(tagline.toString(),
                                                 style: GoogleFonts.actor(
                                                     color: Colors.grey,
-                                                    fontSize: size.height * 0.018),
+                                                    fontSize:
+                                                        size.height * 0.018),
                                                 maxLines: 1,
-                                                overflow: TextOverflow.ellipsis),
+                                                overflow:
+                                                    TextOverflow.ellipsis),
                                           ),
                                         ],
                                       ),
@@ -167,60 +181,90 @@ class _MoviesViewState extends State<MoviesView> {
                                       style: TextStyle(color: Colors.white)),
                                   progressColor: Colors.amber,
                                 )),
-                            
-                          
                           ],
                         ),
-                    ), 
-
-                    Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10.0, left: 5, bottom: 10),
-                                    child: Text(
-                                      'Overview',
-                                      style: GoogleFonts.ubuntu(
-                                          fontSize: size.height * 0.023,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10.0, left: 5, bottom: 10),
+                            child: Text(
+                              'Overview',
+                              style: GoogleFonts.ubuntu(
+                                  fontSize: size.height * 0.023,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
                       Container(
-                                        width: size.width,
-                                        padding: EdgeInsets.only(left: 8, right: 10),
-                                        child: Text(overview.toString(),
+                          width: size.width,
+                          padding: EdgeInsets.only(left: 8, right: 10),
+                          child: Text(overview.toString(),
+                              style: TextStyle(color: Colors.grey))),
                   
-                                            style: TextStyle(color: Colors.grey))),
+                    Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10.0, left: 5, bottom: 5),
+                            child: Text(
+                              'Seasons',
+                              style: GoogleFonts.ubuntu(
+                                  fontSize: size.height * 0.023,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                  
+                  
+                    Container(
+                        height: size.height * 0.3,
+                        width: size.width,
+                        child: ListView(scrollDirection: Axis.horizontal,
+                          children: info!=null?info.map((e) {
+                        return Container(
+                          height: size.height*0.2,
+                          width: size.width*0.4,
+                          decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(urls+e['poster_path'])))
+                        );
 
+                        }).toList():[Lottie.asset('assets/animations/loading.json')]
 
-
-
-                                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10.0, left: 5, bottom: 10),
-                                    child: Text(
-                                      'Similar Movie & Tv Shows',
-                                      style: GoogleFonts.ubuntu(
-                                          fontSize: size.height * 0.023,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                       Container(
-                                      height: size.height * 0.45,
-                                      width: size.width,
-                                      child: SimilarMovieView(
-                                        mid: widget.mid,
-                                      ),
-                                    )
-                  ],
-                ),
-              )
+                    )                    
+                      ),
+                  
+                  
+                  
+                  
+                  
+                  
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10.0, left: 5, bottom: 10),
+                            child: Text(
+                              'Similar Shows',
+                              style: GoogleFonts.ubuntu(
+                                  fontSize: size.height * 0.023,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: size.height * 0.45,
+                        width: size.width,
+                        child: SimilarTvView(
+                          tid: widget.tid,
+                        ),
+                      )
+                    ],
+                  ),
+                )
               : Lottie.asset('assets/animations/loading.json'),
         ));
   }

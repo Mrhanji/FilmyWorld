@@ -14,7 +14,8 @@ class _AllshowsState extends State<Allshows> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return MaterialApp(debugShowCheckedModeBanner: false,
+    return MaterialApp(debugShowCheckedModeBanner: false, theme: ThemeData(
+          brightness: Brightness.dark, accentColor: Colors.transparent),
       home: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(backgroundColor: Colors.black,

@@ -1,13 +1,13 @@
 import 'package:flimyworld/Screens/Allshows.dart';
 import 'package:flimyworld/Screens/MoviesView.dart';
 import 'package:flimyworld/Screens/PersonView.dart';
+import 'package:flimyworld/Screens/TvView.dart';
 import 'package:flimyworld/api/api_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:lottie/lottie.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -41,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
       TrendingMovielist = TrendingTemp['results'];
       personlist = Persons['results'];
       TrendingTvshowslist = Trendingtv['results'];
-      
     });
   }
 
@@ -123,7 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               mid: TrendingMovielist[index]
                                                   ['id'])));
                                 },
-                                child: Hero(tag: TrendingMovielist[index]['id'],
+                                child: Hero(
+                                  tag: TrendingMovielist[index]['id'],
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                         top: 8.0, left: 10, right: 10),
@@ -167,8 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             .toString() +
                                                         '  ',
                                                     style: TextStyle(
-                                                        fontSize:
-                                                            size.height * 0.023))
+                                                        fontSize: size.height *
+                                                            0.023))
                                               ],
                                             )),
                                         Positioned(
@@ -184,8 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         Colors.black12,
                                                         Colors.black
                                                       ],
-                                                      begin: Alignment.topCenter,
-                                                      end: Alignment.bottomCenter,
+                                                      begin:
+                                                          Alignment.topCenter,
+                                                      end: Alignment
+                                                          .bottomCenter,
                                                       stops: [0.0, 1.1],
                                                       tileMode: TileMode.clamp),
                                                 ),
@@ -197,7 +199,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       fontSize:
                                                           size.height * 0.028),
                                                   maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 )))
                                       ],
                                     ),
@@ -318,82 +321,94 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: TrendingTvshowslist.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 8.0, left: 10, right: 10),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      child: Container(
-                                        height: size.height * 0.35,
-                                        width: size.width * 0.45,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(urls +
-                                                    TrendingTvshowslist[index]
-                                                        ['poster_path']),
-                                                fit: BoxFit.fill),
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(18.0),
-                                            ),
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.white12,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                              ),
-                                            ]),
-                                      ),
-                                    ),
-                                    Positioned(
-                                        bottom: size.height * 0.01,
+                              return InkWell(
+                                onTap: () {
+                                  print(TrendingTvshowslist[index]['id']);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => TvView(
+                                                tid: TrendingTvshowslist[index]
+                                                    ['id'],
+                                              )));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, left: 10, right: 10),
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
                                         child: Container(
-                                            width: size.width * 0.45,
-                                            height: size.height * 0.082,
-                                            decoration: BoxDecoration(
-                                              backgroundBlendMode:
-                                                  BlendMode.darken,
-                                              gradient: LinearGradient(
-                                                  colors: [
-                                                    Colors.black12,
-                                                    Colors.black
-                                                  ],
-                                                  begin: Alignment.topCenter,
-                                                  end: Alignment.bottomCenter,
-                                                  stops: [0.0, 1.1],
-                                                  tileMode: TileMode.clamp),
-                                            ),
-                                            child: Text(
-                                              ' ' +
-                                                  TrendingTvshowslist[index]
-                                                      ['original_name'],
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      size.height * 0.025),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ))),
-                                    Positioned(
-                                        bottom: size.height * 0.06,
-                                        right: 0,
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.star_rounded,
-                                              color: Colors.amber.shade600,
-                                            ),
-                                            Text(
-                                                TrendingTvshowslist[index]
-                                                            ['vote_average']
-                                                        .toString() +
-                                                    '  ',
+                                          height: size.height * 0.35,
+                                          width: size.width * 0.45,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage(urls +
+                                                      TrendingTvshowslist[index]
+                                                          ['poster_path']),
+                                                  fit: BoxFit.fill),
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(18.0),
+                                              ),
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.white12,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                ),
+                                              ]),
+                                        ),
+                                      ),
+                                      Positioned(
+                                          bottom: size.height * 0.01,
+                                          child: Container(
+                                              width: size.width * 0.45,
+                                              height: size.height * 0.082,
+                                              decoration: BoxDecoration(
+                                                backgroundBlendMode:
+                                                    BlendMode.darken,
+                                                gradient: LinearGradient(
+                                                    colors: [
+                                                      Colors.black12,
+                                                      Colors.black
+                                                    ],
+                                                    begin: Alignment.topCenter,
+                                                    end: Alignment.bottomCenter,
+                                                    stops: [0.0, 1.1],
+                                                    tileMode: TileMode.clamp),
+                                              ),
+                                              child: Text(
+                                                ' ' +
+                                                    TrendingTvshowslist[index]
+                                                        ['original_name'],
                                                 style: TextStyle(
                                                     fontSize:
-                                                        size.height * 0.023))
-                                          ],
-                                        )),
-                                  ],
+                                                        size.height * 0.025),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ))),
+                                      Positioned(
+                                          bottom: size.height * 0.06,
+                                          right: 0,
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.star_rounded,
+                                                color: Colors.amber.shade600,
+                                              ),
+                                              Text(
+                                                  TrendingTvshowslist[index]
+                                                              ['vote_average']
+                                                          .toString() +
+                                                      '  ',
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          size.height * 0.023))
+                                            ],
+                                          )),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
