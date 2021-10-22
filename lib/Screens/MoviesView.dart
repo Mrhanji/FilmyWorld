@@ -59,7 +59,7 @@ class _MoviesViewState extends State<MoviesView> {
               ? SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(width: size.width,height: size.height,
+                    Container(width: size.width,height: size.height*0.5,
                       child: Stack(
                           children: [
                             Positioned(
@@ -166,13 +166,17 @@ class _MoviesViewState extends State<MoviesView> {
                                       style: TextStyle(color: Colors.white)),
                                   progressColor: Colors.amber,
                                 )),
-                            Positioned(
-                              top: size.height * 0.5,
-                              child: Row(
+                            
+                          
+                          ],
+                        ),
+                    ), 
+
+                    Row(
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 12.0, left: 5, bottom: 0),
+                                        top: 10.0, left: 5, bottom: 10),
                                     child: Text(
                                       'Overview',
                                       style: GoogleFonts.ubuntu(
@@ -182,28 +186,37 @@ class _MoviesViewState extends State<MoviesView> {
                                   ),
                                 ],
                               ),
-                            ),
-                            Positioned(
-                                top: size.height * 0.55,
-                                child: Column(
-                                  children: [
-                                    Container(
+                      Container(
                                         width: size.width,
-                                        padding: EdgeInsets.only(left: 10, right: 10),
+                                        padding: EdgeInsets.only(left: 8, right: 10),
                                         child: Text(overview.toString(),
+                  
                                             style: TextStyle(color: Colors.grey))),
-                                    Container(
+
+
+
+
+                                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10.0, left: 5, bottom: 10),
+                                    child: Text(
+                                      'Similar Movie & Tv Shows',
+                                      style: GoogleFonts.ubuntu(
+                                          fontSize: size.height * 0.023,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                       Container(
                                       height: size.height * 0.45,
                                       width: size.width,
                                       child: SimilarMovieView(
                                         mid: widget.mid,
                                       ),
                                     )
-                                  ],
-                                )),
-                          ],
-                        ),
-                    ),
                   ],
                 ),
               )

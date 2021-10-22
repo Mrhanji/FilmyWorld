@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flimyworld/Screens/MoviesView.dart';
 import 'package:flimyworld/api/api_info.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -29,7 +30,7 @@ class _SimilarMovieViewState extends State<SimilarMovieView> {
       setState(() {
         Map tempdata = jsonDecode(value.body);
         poster = tempdata['results'];
-        print(url);
+       
       });
     });
   }
@@ -43,50 +44,61 @@ class _SimilarMovieViewState extends State<SimilarMovieView> {
             ? poster.map((e) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: size.height * 0.35,
-                          width: size.width * 0.45,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      urls + e['poster_path'].toString()),
-                                  fit: BoxFit.fill),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(18.0),
-                              ),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.white12,
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                ),
-                              ]),
-                        ),
-                        Text(
-                          ' ' + e['original_title'].toString(),
-                          style: TextStyle(
-                              fontSize: size.height * 0.025,
-                              color: Colors.white),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Row(
+                  child: Hero(
+                    tag: e['id'],
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MoviesView(mid: e['id'],)));
+                      },
+                      child: Container(
+                        child: Column(
                           children: [
-                            Icon(
-                              Icons.star_rounded,
-                              color: Colors.amber.shade600,
+                            Container(
+                              height: size.height * 0.35,
+                              width: size.width * 0.45,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          urls + e['poster_path'].toString()),
+                                      fit: BoxFit.fill),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(18.0),
+                                  ),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white12,
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                    ),
+                                  ]),
                             ),
-                            Text('  ' + e['vote_average'].toString(),
-                                style: TextStyle(
-                                    fontSize: size.height * 0.023,
-                                    color: Colors.white))
+                            Text(
+                              ' ' + e['original_title'].toString(),
+                              style: TextStyle(
+                                  fontSize: size.height * 0.025,
+                                  color: Colors.white),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star_rounded,
+                                  color: Colors.amber.shade600,
+                                ),
+                                Text('  ' + e['vote_average'].toString(),
+                                    style: TextStyle(
+                                        fontSize: size.height * 0.023,
+                                        color: Colors.white))
+                              ],
+                            ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 );
