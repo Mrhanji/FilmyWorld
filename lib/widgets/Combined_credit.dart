@@ -29,7 +29,7 @@ class _Combined_creditState extends State<Combined_credit> {
         setState(() {
           Map first = jsonDecode(value.body);
           cast = first['cast'];
-          print(cast);
+       
         });
       }
     });
