@@ -1,3 +1,4 @@
+
 import 'package:flimyworld/Screens/Allshows.dart';
 import 'package:flimyworld/Screens/MoviesView.dart';
 import 'package:flimyworld/Screens/PersonView.dart';
@@ -19,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List TrendingMovielist, TrendingTvshowslist, personlist;
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey();
+  final textController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
@@ -69,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: Icon(CupertinoIcons.search),
               onPressed: () => null,
-            )
+            ),
+
+            
           ],
         ),
         backgroundColor: Colors.black,

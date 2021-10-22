@@ -227,7 +227,7 @@ class _TvViewState extends State<TvView> {
                           children: info!=null?info.map((e) {
                         return Container(
                           height: size.height*0.2,
-                          width: size.width*0.41,
+                          width: size.width*0.4,
                           decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(urls+e['poster_path'])))
                         );
 
