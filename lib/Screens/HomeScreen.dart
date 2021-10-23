@@ -2,6 +2,7 @@ import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flimyworld/Screens/Allshows.dart';
 import 'package:flimyworld/Screens/MoviesView.dart';
 import 'package:flimyworld/Screens/PersonView.dart';
+import 'package:flimyworld/Screens/SearchScreen.dart';
 import 'package:flimyworld/Screens/TvView.dart';
 import 'package:flimyworld/api/api_info.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,19 +21,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List TrendingMovielist, TrendingTvshowslist, personlist;
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey();
-  var textController = TextEditingController();
+ 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 //call our api
     LoadTrendingMovies();
-    textController.addListener(() {
-     
-      setState(() {
-        
-      });
-    });
+  
   }
 
   LoadTrendingMovies() async {
@@ -74,26 +70,13 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           actions: [
-            // IconButton(
-            //   icon: Icon(CupertinoIcons.search),
-            //   onPressed: () => null,
-            // ),
-
-            AnimSearchBar(
-              width: size.width,
-              color: Colors.black,
-              helpText: "Search Feature Comming Soon...",
-              style: TextStyle(color: Colors.white),
-              textController: textController,
-              closeSearchOnSuffixTap: true,
-              onSuffixTap: () {
-                setState(() {
-                  textController.clear();
-                });
-              },
-              //autoFocus: true,
+            IconButton(
+              icon: Icon(CupertinoIcons.search),
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchSCreen())),
             ),
-          ],
+
+          
+         ]
         ),
         backgroundColor: Colors.black,
         drawer: Drawer(),
